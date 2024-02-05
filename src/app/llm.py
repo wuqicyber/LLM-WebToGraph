@@ -39,7 +39,7 @@ class Llm(BaseComponent):
         #                           model_kwargs={"temperature": 0, "max_length": 64})
         self.llm = ChatOpenAI(temperature=0, model_name=model, openai_api_key=os.getenv('OPENAI_API_KEY'))
 
-    @backoff.on_exception(backoff.expo, openai.error.RateLimitError)
+    @backoff.on_exception(backoff.expo, openai.RateLimitError)
     @retry(wait=wait_random_exponential(min=1, max=60), stop=stop_after_attempt(6))
     def run(self, input_text):
         """
