@@ -8,6 +8,18 @@ from services.Identity_retrival_for_csv import NameIdentityRetrievalForCsv
 from services.Identity_retrival_for_html import NameIdentityRetrievalForHtml
 from services.cypher_qa import CypherQa
 
+import os
+import requests
+
+# 设置代理环境变量
+os.environ['HTTP_PROXY'] = 'http://172.27.144.1:10809'
+os.environ['HTTPS_PROXY'] = 'http://172.27.144.1:10809'
+
+# 使用requests库验证代理设置
+response = requests.get('http://www.google.com')
+print(response.status_code)
+
+
 app = FastAPI(
     title="LLM-WebToGraph",
     description="""This project using langchain and OpenAI LLM to transform data from different sources (web 
@@ -44,7 +56,7 @@ async def generate_tags():
     :return: A htmlresponse object with the content as 'successfully generated the knowledge from the data sources!!!' and status_code as 200
 
     """
-    ner = NameIdentityRetrievalForHtml(model_name='gpt-3.5-turbo', data_path='datalayer/datasources.yml')
+    ner = NameIdentityRetrievalForHtml(model_name='gpt-3.5-turbo', data_path='../datalayer/datasources.yml')
     ner.run_async()  # asyncronous call since html pages can take time to load and scrape
     return HTMLResponse(content='Successfully generated the knowledge from the data sources!!!', status_code=200)
 
@@ -58,7 +70,7 @@ def generate_tags():
 
     :return: A htmlresponse object with the status code 200
     """
-    ner = NameIdentityRetrievalForCsv(model_name='gpt-3.5-turbo', data_path='datalayer/datasources.yml')
+    ner = NameIdentityRetrievalForCsv(model_name='gpt-3.5-turbo', data_path='../datalayer/datasources.yml')
     ner.run()
     return HTMLResponse(content='Successfully generated the knowledge from the data sources!!!', status_code=200)
 
@@ -70,6 +82,10 @@ def health_check():
 
 
 if __name__ == '__main__':
-    app_config = utils.read_yaml_file('app/config.yml')
+    import os
+
+    print("Current working directory:", os.getcwd())
+
+    app_config = utils.read_yaml_file('config.yml')
     load_dotenv()
     uvicorn.run(app, port=app_config.get('port'), host=app_config.get('host'))

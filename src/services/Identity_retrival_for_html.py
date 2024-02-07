@@ -25,7 +25,7 @@ class NameIdentityRetrievalForHtml(BaseComponent):
         self.sources = utils.read_yaml_file(data_path)
         self.html_sources = self.sources.get('link', [])
         # instantiating the openai llm model and neo4j connection
-        self.neo4j_instance = Neo4jDumper(config_path='app/config.yml')
+        self.neo4j_instance = Neo4jDumper(config_path='config.yml')
         self.open_ai_llm = Llm(model=model_name)
 
     def run_async(self, **kwargs):

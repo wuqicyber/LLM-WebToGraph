@@ -44,7 +44,8 @@ The LLM-WebToGraph project combines several key components to achieve its goal:
 ~~~
 To access the application
 ~~~html
-http://localhost:8501/
+
+
 ~~~
 
 To check backend APIs, access the swagger at

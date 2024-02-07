@@ -45,7 +45,7 @@ class BaseComponent(ABC):
         logger.setLevel(logging.INFO)
 
         # Create a file handler for logging to a file
-        file_handler = logging.FileHandler('logs/logs.txt')
+        file_handler = logging.FileHandler('../logs/logs.txt')
 
         # Create a formatter
         formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')

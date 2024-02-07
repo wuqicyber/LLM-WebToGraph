@@ -28,7 +28,7 @@ def get_schema():
     :return: The schema
     :doc-author: Trelent
     """
-    schema = utils.read_yaml_file('services/schema.yml')
+    schema = utils.read_yaml_file('/services/schema.yml')
     return schema
 
 

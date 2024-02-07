@@ -10,7 +10,7 @@ RUN pip install --no-cache-dir -r /requirements.txt
 # Copy the project files into the container
 COPY ./src /src
 
-RUN MKDIR ./logs/
+RUN mkdir ./logs/
 
 # Expose any necessary ports
 EXPOSE 8000

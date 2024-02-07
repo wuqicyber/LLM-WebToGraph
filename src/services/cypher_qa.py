@@ -8,7 +8,7 @@ class CypherQa(BaseComponent):
     def __init__(self, model_name):
         super().__init__('cypher_qa')
         # instantiating the openai llm model and neo4j connection
-        self.neo4j_instance = Neo4jDumper(config_path='app/config.yml')
+        self.neo4j_instance = Neo4jDumper(config_path='config.yml')
         self.open_ai_llm = Llm(model=model_name)
         # schema = utils.read_yaml_file('services/schemaN.yml')
         # graph_schema = construct_schema(schema,[],[])
